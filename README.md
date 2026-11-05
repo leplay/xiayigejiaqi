@@ -42,11 +42,10 @@ The mini program and the website read `https://general.lesignstatic.com/config/j
 
 The 下一个假期 公众号 answers 「假期」「春节」「国庆」… from two files in `lesign/wechat-channel`. `consts/jiaqi.json` holds this year's holidays, keyed by name and keyword. `consts/jiaqi-next.json` holds next year's 元旦 / 春节.
 
-1. In `wechat-channel`, run `bun scripts/update-jiaqi-online.js`. It reads `jiaqi.json` from this repo's `master` on GitHub and rewrites both files.
-2. Add a `除夕` key to both files by hand, because the script does not generate it. Each one is a copy of that file's 春节 entry, with `name` set to `"除夕"` and `holiday` set to the day before 春节.
-3. Check a few replies: `TZ=Asia/Shanghai node -e "console.log(require('./utils/jiaqi').jiaqi('假期'))"`.
-4. Commit (a husky hook runs prettier) and push `master`.
-5. Deploy on the `bj` server, where pm2 runs it as process `studio` (details in `DEV/servers/Agent.md`): `git pull --ff-only origin master && pm2 restart studio`. Then send 「假期」 to the 公众号 and check the reply.
+1. In `wechat-channel`, run `bun scripts/update-jiaqi-online.js`. It reads `jiaqi.json` from this repo's `master` on GitHub and rewrites both files. It also adds `除夕` (the 春节 entry, dated the day before) to each file.
+2. Check a few replies: `TZ=Asia/Shanghai node -e "console.log(require('./utils/jiaqi').jiaqi('假期'))"`.
+3. Commit (a husky hook runs prettier) and push `master`.
+4. Deploy on the `bj` server, where pm2 runs it as process `studio` (details in `DEV/servers/Agent.md`): `git pull --ff-only origin master && pm2 restart studio`. Then send 「假期」 to the 公众号 and check the reply.
 
 ---
 
